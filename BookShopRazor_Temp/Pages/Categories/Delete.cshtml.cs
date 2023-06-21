@@ -23,13 +23,14 @@ namespace BookShopRazor_Temp.Pages.Categories
 		}
 		public IActionResult OnPost()
 		{
-			Category? obj = _db.Categories.Find(Category);
+			Category? obj = _db.Categories.Find(Category.Id);
 			if (obj == null)
 			{
 				return NotFound();
 			}
 			_db.Categories.Remove(obj);
 			_db.SaveChanges();
+			TempData["success"] = "Category deleted successfully";
 			return RedirectToPage("Index");
 		}
 	}
