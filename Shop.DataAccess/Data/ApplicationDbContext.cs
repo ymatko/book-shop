@@ -22,7 +22,7 @@ namespace Shop.DataAccess.Data
                 new Category { Id = 3, Name = "History", DisplayOrder = 3 }
                 );
 
-            modelBuilder.Entity<Category>().HasData(
+            modelBuilder.Entity<Product>().HasData(
 				new Product
 				{
 					Id = 1,
