@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Shop.DataAccess.Data;
 using Shop.DataAccess.Repository.IRepository;
 using Shop.Models;
+using System.Collections;
 
 namespace BookShop.Areas.Admin.Controllers
 {
@@ -16,13 +18,23 @@ namespace BookShop.Areas.Admin.Controllers
         public IActionResult Index()
         {
             List<Product> objProductList = _unitOfWork.Product.GetAll().ToList();
-            return View(objProductList);
+                        return View(objProductList);
         }
-        public IActionResult Create()
-        {
-            return View();
-        }
-        [HttpPost]
+		public IActionResult Create()
+		{
+			IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category
+			   .GetAll().Select(u => new SelectListItem
+			   {
+				   Text = u.Name,
+				   Value = u.Id.ToString()
+			   });
+
+            //ViewBag.CategoryList = CategoryList;
+            ViewData["CategoryList"] = CategoryList;
+
+			return View();
+		}
+		[HttpPost]
         public IActionResult Create(Product obj)
         {
             if (ModelState.IsValid)
