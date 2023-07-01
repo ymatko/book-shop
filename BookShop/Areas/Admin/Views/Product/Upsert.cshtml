@@ -4,12 +4,13 @@
 	<div class="card-header bg-dark m-lg-0 py-3">
 		<div class="row">
 			<div class="col-12 text-center">
-				<h2 class="text-white py-2">Create product</h2>
+				<h2 class="text-white py-2">@(Model.Product.Id!=0?"Update ":"Create ") product</h2>
 			</div>
 		</div>
 	</div>
 	<div class="card-body p-4">
 		<form method="post" class="row" enctype="multipart/form-data">
+			<input asp-for="Product.Id" hidden />
 			<div class="border p-3 mt-4">
 				<div class="mb-3 row p-1">
 					<label asp-for="Product.Title" class="p-0"></label>
@@ -19,7 +20,6 @@
 				<div class="mb-3 row p-1">
 					<label asp-for="Product.Description" class="p-0"></label>
 					<textarea asp-for="Product.Description" class="form-control"></textarea>
-					<span asp-validation-for="Product.Description" class="text-danger"></span>
 				</div>
 				<div class="mb-3 row p-1">
 					<label asp-for="Product.ISBN" class="p-0"></label>
@@ -64,7 +64,7 @@
 				</div>
 				<div class="row pt-2 p-4">
 					<div class="col-6 col-md-3">
-						<button type="submit" class="btn btn-dark form-control">Create</button>
+						<button type="submit" class="btn btn-dark form-control">@(Model.Product.Id != 0 ? "Edit" : "Create")</button>
 					</div>
 					<div class="col-6 col-md-3">
 						<a asp-controller="Product" asp-action="Index" class="btn btn-outline-dark form-control">
@@ -80,6 +80,13 @@
 
 
 @section Scripts{
+	<script>
+		tinymce.init({
+			selector: 'textarea',
+			plugins: 'anchor autolink charmap codesample emoticons lists table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tableofcontents footnotes mergetags autocorrect typography inlinecss',
+			toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent ',
+		});
+	</script>
 	@{
 		<partial name="_ValidationScriptsPartial"/>
 	}
