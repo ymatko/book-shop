@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Shop.DataAccess.Data;
 using Shop.DataAccess.Repository.IRepository;
@@ -19,7 +20,7 @@ namespace BookShop.Areas.Admin.Controllers
         public IActionResult Index()
         {
             List<Product> objProductList = _unitOfWork.Product.GetAll().ToList();
-                        return View(objProductList);
+            return View(objProductList);
         }
 		public IActionResult Upsert(int? id)
 		{
@@ -50,7 +51,7 @@ namespace BookShop.Areas.Admin.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				_unitOfWork.Product.Add(productVM.Product);
+				_unitOfWork.Product.Update(productVM.Product);
 				_unitOfWork.Save();
 				TempData["success"] = "Product created successfully";
 				return RedirectToAction("Index");
@@ -65,8 +66,8 @@ namespace BookShop.Areas.Admin.Controllers
 				return View(productVM);
 			}
 		}
-		
-        public IActionResult Delete(int? id)
+
+		public IActionResult Delete(int? id)
         {
             if (id == null || id == 0)
             {
