@@ -23,21 +23,11 @@
 		<table class="table table-bordered table-striped">
 			<thead>
 				<tr>
-					<th>
-						Title
-					</th>
-					<th>
-						Description
-					</th>
-					<th>
-						ISBN
-					</th>
-					<th>
-						Author
-					</th>
-					<th>
-						Category
-					</th>
+					<th>Title</th>
+					<th>ISBN</th>
+					<th>Price</th>
+					<th>Author</th>
+					<th>Category</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -45,18 +35,19 @@
 				@foreach (var obj in Model)
 				{
 					<tr>
-						<td>@obj.Title</td>
 						<td>
-							@obj.Description
+							@obj.Title
 						</td>
 						<td>
 							@obj.ISBN
 						</td>
 						<td>
+							@obj.ListPrice
+						</td>
+						<td>
 							@obj.Author
 						</td>
 						<td>
-							
 						</td>
 						<td>
 							<div class="w-75 btn-group" role="group">
