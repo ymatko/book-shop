@@ -1,15 +1,19 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Shop.DataAccess.Data;
 using Shop.DataAccess.Repository.IRepository;
 using Shop.Models;
 using Shop.Models.ViewModels;
+using Shop.Utility;
 using System.Collections;
+using System.Data;
 
 namespace BookShop.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
