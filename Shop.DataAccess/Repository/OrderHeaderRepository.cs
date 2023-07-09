@@ -20,7 +20,7 @@ namespace Shop.DataAccess.Repository
 
 		public void Update(OrderHeader obj)
 		{
-			_db.OrderHeader.Update(obj);
+			_db.OrderHeaders.Update(obj);
 		}
 	}
 }
