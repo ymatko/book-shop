@@ -18,7 +18,7 @@ $(document).ready(function () {
                     loadDataTable("approved");
                 }
                 else {
-                    loadDataTable("all")
+                    loadDataTable("all");
                 }
             }
         }
