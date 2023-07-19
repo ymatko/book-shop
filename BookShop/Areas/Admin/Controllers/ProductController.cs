@@ -106,35 +106,40 @@ namespace BookShop.Areas.Admin.Controllers
 			}
 		}
 
-		#region API CALLS
+        #region API CALLS
 
-		[HttpGet]
-		public IActionResult GetAll()
-		{
-			List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties: "Category").ToList();
-			return Json( new { data = objProductList });
-		}
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties: "Category").ToList();
+            return Json(new { data = objProductList });
+        }
 
-		[HttpDelete]
-		public IActionResult Delete(int? id)
-		{
-			var productToBeDeleted = _unitOfWork.Product.Get(u => u.Id == id);
-			if(productToBeDeleted == null)
-			{
-				return Json(new { success = false, massage = "Error while deleteing" });
-			}
 
-			var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, productToBeDeleted.ImageUrl.TrimStart('\\'));
+        [HttpDelete]
+        public IActionResult Delete(int? id)
+        {
+            var productToBeDeleted = _unitOfWork.Product.Get(u => u.Id == id);
+            if (productToBeDeleted == null)
+            {
+                return Json(new { success = false, message = "Error while deleting" });
+            }
 
-			if (System.IO.File.Exists(oldImagePath))
-			{
-				System.IO.File.Delete(oldImagePath);
-			}
-			_unitOfWork.Product.Remove(productToBeDeleted);
-			_unitOfWork.Save();
-			return Json(new { success = true, message = "Delete Successful" });
-		}
+            var oldImagePath =
+                           Path.Combine(_webHostEnvironment.WebRootPath,
+                           productToBeDeleted.ImageUrl.TrimStart('\\'));
 
-		#endregion
-	}
+            if (System.IO.File.Exists(oldImagePath))
+            {
+                System.IO.File.Delete(oldImagePath);
+            }
+
+            _unitOfWork.Product.Remove(productToBeDeleted);
+            _unitOfWork.Save();
+
+            return Json(new { success = true, message = "Delete Successful" });
+        }
+
+        #endregion
+    }
 }

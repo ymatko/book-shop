@@ -79,7 +79,7 @@ namespace BookShop.Areas.Admin.Controllers
 			var CompanyToBeDeleted = _unitOfWork.Company.Get(u => u.Id == id);
 			if(CompanyToBeDeleted == null)
 			{
-				return Json(new { success = false, massage = "Error while deleteing" });
+				return Json(new { success = false, massage = "Error while deleting" });
 			}
 
 			_unitOfWork.Company.Remove(CompanyToBeDeleted);
