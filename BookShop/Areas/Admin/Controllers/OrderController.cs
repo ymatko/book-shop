@@ -140,9 +140,9 @@ namespace BookShop.Areas.Admin.Controllers
             OrderVM.OrderHeader = _unitOfWork.OrderHeader.Get(u => u.Id == OrderVM.OrderHeader.Id, includeProperties: "ApplicationUser");
             OrderVM.OrderDetail = _unitOfWork.OrderDetail.GetAll(u => u.OrderHeaderId == OrderVM.OrderHeader.Id, includeProperties: "Product");
 
-				//stripe logic
-				var domain = "https://localhost:7040/";
-				var options = new SessionCreateOptions
+            //stripe logic
+            var domain = Request.Scheme + "://" + Request.Host.Value + "/";
+            var options = new SessionCreateOptions
 				{
 					SuccessUrl = domain + $"admin/cart/PaymentConfirmation?orderHeaderId={OrderVM.OrderHeader.Id}",
 					CancelUrl = domain + $"admin/order/details?orderId={OrderVM.OrderHeader.Id}",
