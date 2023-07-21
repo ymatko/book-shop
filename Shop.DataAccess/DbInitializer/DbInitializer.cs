@@ -64,7 +64,7 @@ namespace Shop.DataAccess.DbInitializer
                     City = "Albuquerque"
                 }, "Admin123!").GetAwaiter().GetResult();
 
-                ApplicationUser user = _db.applicationUsers.FirstOrDefault(u => u.Email == "admin@dotnetmastery.com");
+                ApplicationUser user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "admin@dotnetmastery.com");
                 _userManager.AddToRoleAsync(user, SD.Role_Admin).GetAwaiter().GetResult();
             }
 
